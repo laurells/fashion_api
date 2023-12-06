@@ -1,7 +1,6 @@
 {
 	"info": {
-		"_postman_id": "f69c0f88-ca2b-4c40-8730-2a3e5e6070af",
-		"name": "Haru API",
+		"name": "Laurels API",
 		"description": "Welcome to the Laurels-Fashion API, a RESTful API for Laurels-Fashion e-commerce web application. \n\nThis API can be used to access Laurels-Fashion API endpoints, which can get information on various products, categories in our database. Certain information and actions, for example, retrieving customers, creating products, can only be done when authenticated and authorized. \n\nThis API is developed with NodeJS, Express, TypeScript, Prisma and PostgreSQL.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
