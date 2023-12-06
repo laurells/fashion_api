@@ -1,7 +1,7 @@
 {
-  "name": "haru-api",
+  "name": "laurels-api",
   "version": "1.0.0",
-  "description": "A RESTful API for Haru-Fashion e-commerce web application.",
+  "description": "A RESTful API for Laurels-Fashion e-commerce web application.",
   "main": "server.js",
   "scripts": {
     "start": "node dist/server.js",
