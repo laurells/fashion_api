@@ -1,107 +1,22 @@
+// Prisma schema
+
+// Define a generator for the Prisma client
 generator client {
   provider = "prisma-client-js"
-  // binaryTargets = ["native", "debian-openssl-1.1.x", "linux-musl"] // for linux
-  binaryTargets = ["native", "linux-arm64-openssl-1.1.x"] 
-  previewFeatures = ["fullTextSearch"]
+  output   = "./generated/client"
 }
 
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+// Define the data source for MongoDB
+datasource mongo {
+  provider = "mongodb"
+  url      = env("MONGODB_URI")
 }
 
+// Define the enums for roles, delivery types, and payment types
 enum Role {
   SUPERADMIN
   ADMIN
   MODERATOR
-}
-
-model Admin {
-  id          Int       @id @default(autoincrement())
-  username    String    @db.VarChar(50)
-  email       String    @db.VarChar(50) @unique
-  password    String    @db.VarChar(255)
-  role        Role      @default(ADMIN)
-  active      Boolean   @default(true)
-  createdAt   DateTime  @default(now()) @map("created_at")
-  updatedAt   DateTime? @map("updated_at")
-
-  @@map("admins")
-}
-
-model Category {
-  id              Int     @id @default(autoincrement())
-  name            String     @db.VarChar(50) @unique
-  description     String?    @db.VarChar(255)
-  thumbnailImage  String?    @db.VarChar(100) @map("thumbnail_image")
-  createdAt       DateTime  @default(now()) @map("created_at")
-  updatedAt       DateTime?  @map("updated_at")
-  products        Product[]
-
-  @@map("categories")
-}
-
-model Product {
-  id               Int          @id @default(autoincrement())
-  name             String       @db.VarChar(50)
-  price            Decimal      @db.Decimal(7, 2)
-  discountPercent  Int?         @default(0) @map("discount_percent") 
-  description      String       @db.VarChar(255)
-  detail           String?
-  category         Category?    @relation(fields: [categoryId], references: [id], onDelete: NoAction)
-  categoryId       Int?         @map("category_id")
-  image1           String       @db.VarChar(100) @map("image_1")
-  image2           String       @db.VarChar(100) @map("image_2")
-  stock            Int?         @default(0)
-  createdAt        DateTime     @default(now()) @map("created_at")
-  updatedAt        DateTime?    @map("updated_at")
-  product          OrderDetail[]
-  tags             Tag[]
-
-  @@map("products")
-}
-
-model Tag {
-  id          Int       @id @default(autoincrement())
-  name        String    @db.VarChar(50)
-  products    Product[]
-
-  @@map("tags")
-}
-
-model Customer {
-  id                Int       @id @default(autoincrement())
-  fullname          String    @db.VarChar(50)
-  email             String    @db.VarChar(50) @unique
-  password          String    @db.VarChar(255)
-  shippingAddress   String    @map("default_shipping_address")
-  phone             String?   @db.VarChar(20)
-  orders            Order[]
-  resetPwdToken     String?    @db.VarChar(255) @unique  @map("reset_password_token")
-  resetPwdExpire    BigInt?    @db.BigInt @map("reset_password_expire")
-  createdAt        DateTime     @default(now()) @map("created_at")
-  updatedAt        DateTime?    @map("updated_at")
-  
-  @@map("customers")
-}
-
-model Order {
-  orderNumber       Int           @id @default(autoincrement()) @map("order_number")
-  customer          Customer      @relation(fields: [customerId], references: [id])
-  customerId        Int           @map("customer_id")
-  shippingAddress   String        @map("shipping_address")
-  township          String?       @db.VarChar(20)
-  city              String?       @db.VarChar(20)
-  state             String?       @db.VarChar(20)
-  zipCode           String?       @db.VarChar(20) @map("zip_code")
-  orderDate         DateTime      @db.Date @default(now()) @map("order_date")
-  paymentType       PaymentType   @default(CASH_ON_DELIVERY) @map("payment_type")
-  deliveryType      DeliveryType  @default(STORE_PICKUP) @map("delivery_type")
-  totalPrice        Float         @map("total_price")
-  deliveryDate      DateTime      @db.Date @map("delivery_date")
-  orders            OrderDetail[]
-
-  @@map("orders")
 }
 
 enum DeliveryType {
@@ -115,13 +30,95 @@ enum PaymentType {
   BANK_TRANSFER
 }
 
+// Define the Admin model
+model Admin {
+  id       ObjectId  @id
+  username String
+  email    String    @unique
+  password String
+  role     Role      @default(ADMIN)
+  active   Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime?
+}
+
+// Define the Category model
+model Category {
+  id              ObjectId  @id
+  name            String    @unique
+  description     String?
+  thumbnailImage  String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime?
+  products        Product[]
+}
+
+// Define the Product model
+model Product {
+  id               ObjectId  @id
+  name             String
+  price            Float
+  discountPercent Int?      @default(0)
+  description      String
+  detail           String?
+  category         Category? @relation(fields: [categoryId], references: [id])
+  categoryId       ObjectId?
+  image1           String?
+  image2           String?
+  stock            Int?      @default(0)
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime?
+  product          OrderDetail[]
+  tags             Tag[]
+}
+
+// Define the Tag model
+model Tag {
+  id      ObjectId  @id
+  name    String
+  products Product[]
+}
+
+// Define the Customer model
+model Customer {
+  id                ObjectId  @id
+  fullname          String
+  email             String    @unique
+  password          String
+  shippingAddress   String
+  phone             String?
+  orders            Order[]
+  resetPwdToken     String?   @unique
+  resetPwdExpire    Int?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime?
+}
+
+// Define the Order model
+model Order {
+  orderNumber       Int       @id @unique
+  customer          Customer? @relation(fields: [customerId], references: [id])
+  customerId        ObjectId?
+  shippingAddress   String
+  township          String?
+  city              String?
+  state             String?
+  zipCode           String?
+  orderDate         DateTime  @default(now())
+  paymentType       PaymentType @default(CASH_ON_DELIVERY)
+  deliveryType      DeliveryType @default(STORE_PICKUP)
+  totalPrice        Float
+  deliveryDate      DateTime?
+  orders            OrderDetail[]
+}
+
+// Define the OrderDetail model
 model OrderDetail {
-  order         Order   @relation(fields: [orderNumber], references: [orderNumber], onDelete: Cascade)
-  orderNumber   Int     
-  product       Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-  productId     Int
-  quantity      Int     @default(1)
+  order       Order   @relation(fields: [orderNumber], references: [orderNumber])
+  orderNumber Int
+  product     Product @relation(fields: [productId], references: [id])
+  productId   ObjectId
+  quantity    Int     @default(1)
 
   @@id([orderNumber, productId])
-  @@map("order_details")
 }

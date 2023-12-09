@@ -208,7 +208,7 @@ export const createOrder = asyncHandler(async (req, res, next) => {
       // send email to user
       await sendMail({
         email: order.customer.email,
-        subject: "Haru Fashion Order Received",
+        subject: "Laurels Fashion Order Received",
         message,
       });
       res.status(201).json({
