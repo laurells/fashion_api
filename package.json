@@ -10,7 +10,7 @@
     "swagger": "node ./swagger.js",
     "dev:down": "docker-compose down",
     "dev:build": "docker-compose up --build",
-    "build": "tsc -p .",
+    "build": "tsc -p . -d ./dist",
     "migrate:test": "dotenv -e .env.test -- npx prisma migrate dev --name postgres-init",
     "seed:test": "dotenv -e .env.test -- npx prisma db seed",
     "generate:test": "dotenv -e .env.test -- npx prisma generate",
