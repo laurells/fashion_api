@@ -775,8 +775,8 @@ export const products = [
       "mattis nibh ligula nec sem duis aliquam convallis nunc proin at turpis a pede posuere nonummy integer non velit donec diam neque vestibulum eget vulputate ut ultrices vel augue vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae donec pharetra magna vestibulum",
     categoryId: 3,
     image1:
-      "https://robohash.org/voluptatemsuntnostrum.png?size=300x300&set=set1",
-    image2: "https://robohash.org/utrationetempore.png?size=300x300&set=set1",
+      "https://i.ibb.co/ygvLnKn/minimalist-img-3-364x492.jpg",
+    image2: "https://i.ibb.co/VW0r4Tf/minimalist-img-31-364x492.jpg",
     stock: 72,
   },
   {
@@ -1858,8 +1858,8 @@ export const products = [
     detail:
       "ultrices posuere cubilia curae nulla dapibus dolor vel est donec odio justo sollicitudin ut suscipit a feugiat et eros vestibulum ac est lacinia nisi venenatis tristique fusce congue diam id ornare imperdiet sapien urna",
     categoryId: 1,
-    image1: "https://robohash.org/repellatestnulla.png?size=300x300&set=set1",
-    image2: "https://robohash.org/illumadblanditiis.png?size=300x300&set=set1",
+    image1: "https://i.ibb.co/QHBzFhv/minimalist-img-51-364x492.jpg",
+    image2: "https://i.ibb.co/GTjhWTF/minimalist-img-61-364x492.jpg",
     stock: 50,
   },
   {

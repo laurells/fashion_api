@@ -6,7 +6,7 @@ import cors from "cors";
 import ErrorResponse from "./utils/errorResponse";
 import { resource404Error } from "./utils/errorObject";
 import errorHandler from "./middlewares/errorHandler";
-
+import bodyParser from "body-parser";
 // import routes
 import categories from "./routers/categories";
 import products from "./routers/products";
@@ -19,7 +19,7 @@ const app = express();
 
 // Enable CORS
 app.use(cors());
-
+app.use(bodyParser.json()); // Parse JSON bodies
 // Set HTTP Hseaders
 app.use(helmet());
 
