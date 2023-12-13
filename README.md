@@ -5,15 +5,8 @@ RESTful API for Laurels Fashion web application. Developed with NodeJS, Express,
 ## Badges
 
 ![ts](https://badgen.net/badge/Built%20With/TypeScript/blue)
-[![CircleCI](https://circleci.com/gh/satnaing/haru-api/tree/master.svg?style=shield)](https://circleci.com/gh/satnaing/haru-api/tree/master)
-[![Heroku](https://pyheroku-badge.herokuapp.com/?app=angularjs-crypto&style=flat)](https://haru-fashion.herokuapp.com/)
 [![Jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
 [![Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
-
-## Demo
-
-[🚀 API Demo](https://haru-fashion.herokuapp.com/api/v1/categories)  
-[📖 API Docs](https://satnaing.github.io/haru-api/)
 
 ## Features
 
@@ -38,13 +31,7 @@ Here are some of the project's features
 Clone the project
 
 ```bash
-git clone https://github.com/satnaing/haru-api.git
-```
-
-Go to the project directory
-
-```bash
-cd haru-api
+git clone https://github.com/laurells/fashion_api.git
 ```
 
 Remove remote origin
@@ -69,7 +56,7 @@ _add the following environment variables to .env file. (some env var include exa
   - `PORT`  
   - `POSTGRES_USER=testuser`
   - `POSTGRES_PASSWORD=test123`
-  - `POSTGRES_DB=haru`
+  - `POSTGRES_DB=fashion`
   - `JWT_SECRET`
   - `SMTP_HOST`
   - `SMTP_PORT`
@@ -77,7 +64,7 @@ _add the following environment variables to .env file. (some env var include exa
   - `SMTP_PASS`
   - `FROM_NAME`
   - `FROM_MAIL`
-  - `DATABASE_URL="postgresql://testuser:test123@postgres:5432/haru?schema=public"`
+  - `DATABASE_URL="postgresql://testuser:test123@postgres:5432/fashion?schema=public"`
 </details>
 
 Migrate and seed database
